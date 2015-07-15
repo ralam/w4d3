@@ -1,11 +1,11 @@
-<form action="<%= users_url %>" method="post">
+<form action="<%= sessions_url %>" method="post">
 
   <label for="username">Username</label>
   <input
     type="text"
     name="user[username]"
     id="username"
-    value="<%= @user.username %>">
+    value="<%= params[:user][:username] %>">
 
   <label for="Password">Password</label>
   <input
@@ -14,5 +14,5 @@
     id="Password"
   >
 
-  <input type="submit" value="Sign up!">
+  <input type="submit" value="Log in!">
 </form>

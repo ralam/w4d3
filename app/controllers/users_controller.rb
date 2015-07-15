@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :redirect_to_index_if_not_logged_in, except: [:new, :create]
+
   def new
     @user = User.new
     render :new
@@ -7,13 +9,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to(user_url)
+      redirect_to(cats_url)
     else
+      fail
       flash.now[:errors] = "Could not create user"
       render :new
     end
   end
 
-  private
-
+  def show
+  end
 end

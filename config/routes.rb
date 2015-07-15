@@ -5,7 +5,7 @@ NinetyNineCatsDay1::Application.routes.draw do
     post "deny", on: :member
   end
 
-  resources :users, only: [:create, :new]
+  resources :users, only: [:create, :new, :show]
 
   resources :sessions, only: [:create, :new, :destroy]
 
