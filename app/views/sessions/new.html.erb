@@ -1,11 +1,12 @@
 <form action="<%= sessions_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
   <label for="username">Username</label>
   <input
     type="text"
     name="user[username]"
     id="username"
-    value="<%= params[:user][:username] %>">
+    value="<%= @user.username %>">
 
   <label for="Password">Password</label>
   <input

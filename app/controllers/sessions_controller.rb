@@ -8,12 +8,14 @@ class SessionsController < ApplicationController
       redirect_to(cats_url)
     else
       flash[:errors] = "Invalid username/password combination"
+      @user = User.new(user_params)
       render :new
     end
   end
 
   def new
     @user = User.new
+    render :new
   end
 
   def destroy

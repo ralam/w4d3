@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :cats
+  has_many :cat_rental_requests
+
   before_validation :ensure_session_token
 
   validates :username, :session_token, :password_digest, presence: true

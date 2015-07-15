@@ -1,4 +1,7 @@
 class CatsController < ApplicationController
+  before_action :redirect_to_index_if_not_logged_in, except: [:index, :show]
+  before_action :make_sure_owner_owns_cat, only: [:edit]
+
   def index
     @cats = Cat.all
     render :index
@@ -16,6 +19,7 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
+    @cat.user_id = current_user.id
     if @cat.save
       redirect_to cat_url(@cat)
     else
@@ -40,6 +44,13 @@ class CatsController < ApplicationController
   end
 
   private
+
+  def make_sure_owner_owns_cat
+    unless current_user.id == Cat.find(params[:id]).user_id
+      flash[:errors] = "Can't edit cat you don't own"
+      redirect_to cats_url
+    end
+  end
 
   def cat_params
     params.require(:cat)

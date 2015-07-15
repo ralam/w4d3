@@ -11,7 +11,6 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to(cats_url)
     else
-      fail
       flash.now[:errors] = "Could not create user"
       render :new
     end
