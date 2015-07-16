@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by_credentials(user_params[:username], user_params[:password])
     if @user
-      log_in!(@user)
+      log_in!
       redirect_to(cats_url)
     else
       flash.now[:errors] = "Invalid username/password combination"
@@ -20,8 +20,8 @@ class SessionsController < ApplicationController
 
   def destroy
     @user = current_user
+    @current_session.destroy_session!
     session[:session_token] = nil
-    @user.reset_session_token!
     redirect_to cats_url
   end
 
