@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       log_in!(@user)
       redirect_to(cats_url)
     else
-      flash[:errors] = "Invalid username/password combination"
+      flash.now[:errors] = "Invalid username/password combination"
       @user = User.new(user_params)
       render :new
     end

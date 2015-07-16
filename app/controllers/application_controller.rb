@@ -5,10 +5,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :requesting_user
 
-  def requesting_user(req)
-    User.find(req.user_id).username
-  end
-
   def redirect_to_index_if_not_logged_in
     unless current_user
       flash[:errors] = "Must be logged in to perform this action."
@@ -26,5 +22,9 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find_by(session_token: session[:session_token])
+  end
+
+  def requesting_user(req)
+    User.find(req.user_id).username
   end
 end

@@ -9,6 +9,7 @@ class CatsController < ApplicationController
 
   def show
     @cat = Cat.find(params[:id])
+    @rental_requests = CatRentalRequest.includes(:user).where(cat_id: params[:id])
     render :show
   end
 
